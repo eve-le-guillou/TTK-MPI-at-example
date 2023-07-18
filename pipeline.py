@@ -97,7 +97,7 @@ cellDatatoPointData1.CellDataArraytoprocess = ['ScalarGradient', 'gradientMagnit
 # create a new 'Resample To Image'
 resampleToImage1 = ResampleToImage(registrationName='ResampleToImage1', Input=cellDatatoPointData1)
 resampleToImage1.SamplingDimensions = [dim, dim, dim]
-resampleToImage1.SamplingBounds = [0.0, 176.0, 0.0, 94.0, 0.0, 47.0]
+#resampleToImage1.SamplingBounds = [0.0, 176.0, 0.0, 94.0, 0.0, 47.0]
 
 # create a new 'TTK ScalarFieldSmoother'
 tTKScalarFieldSmoother1 = TTKScalarFieldSmoother(registrationName='TTKScalarFieldSmoother1', Input=resampleToImage1)
@@ -118,7 +118,6 @@ tTKScalarFieldNormalizer2.ScalarField = ['POINTS', 'density']
 # create a new 'TTK ArrayPreconditioning'
 tTKArrayPreconditioning1 = TTKArrayPreconditioning(registrationName='TTKArrayPreconditioning1', Input=tTKScalarFieldNormalizer2)
 tTKArrayPreconditioning1.PointDataArrays = ['density']
-tTKArrayPreconditioning1.BurstSize = 500
 
 # create a new 'TTK ScalarFieldCriticalPoints'
 tTKScalarFieldCriticalPoints2 = TTKScalarFieldCriticalPoints(registrationName='TTKScalarFieldCriticalPoints2', Input=tTKArrayPreconditioning1)
@@ -389,4 +388,4 @@ criticalTypePWF.ScalarRangeInitialized = 1
 densityPWF = GetOpacityTransferFunction('density')
 densityPWF.Points = [-3.7645358731683567, 1.0, 0.5, 0.0, -1.7128952741622925, 0.1026785746216774, 0.5, 0.0, -1.0048069953918457, 0.0, 0.5, 0.0, 0.17616011873621584, 0.0, 0.5, 0.0, 6.529978816539702, 0.0, 0.5, 0.0]
 densityPWF.ScalarRangeInitialized = 1
-SaveScreenshot("finalAtExample.jpeg",renderView1, ImageResolution=[1280, 720])
+SaveScreenshot("atExample.jpeg",renderView1, ImageResolution=[1280, 720])
