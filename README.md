@@ -6,6 +6,7 @@ This github repository contains the exact code used to reproduce the AT example.
 Hardware?
 
 ## Installation Notes
+
 Tested on Ubuntu 22.04.2 LTS.
 
 ### Install the dependencies
@@ -22,14 +23,19 @@ Tested on Ubuntu 22.04.2 LTS.
     git checkout 5.11.0
     mkdir build && cd build
     cmake -DCMAKE_BUILD_TYPE=Release -DPARAVIEW_USE_PYTHON=ON -DPARAVIEW_USE_MPI=ON -DPARAVIEW_INSTALL_DEVELOPMENT_FILES=ON -DCMAKE_INSTALL_PREFIX=../install ..
-    make -j4
     make -j4 install
 
  ### Install TTK
 
     cd ttk-1.2.0
     mkdir build && cd build
-    cmake -DTTK_ENABLE_MPI=ON -D TTK_ENABLE_MPI_TIME=ON -DCMAKE_INSTALL_PREFIX=../install ..
-    make -j4 
+    PARAVIEW_PATH=~/ttk-paraview/install/lib/cmake/paraview-5.11
+    cmake -DParaView_DIR=$PARAVIEW_PATH -DTTK_ENABLE_MPI=ON -DTTK_ENABLE_MPI_TIME=ON -DCMAKE_INSTALL_PREFIX=../install .. 
     make -j4 install
+
+### Run the example
+
+By default, the example is resampled to 512.
+
+    OMP_NUM_THREADS=4 mpirun -n 4 pvbatch pipeline.py
 
