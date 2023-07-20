@@ -1,20 +1,20 @@
 # TTK-MPI-at-example
 This github repository contains the exact code used to reproduce the AT example.
 
-## Prerequisites
-
-Hardware?
-
 ## Installation Notes
 
 Tested on Ubuntu 22.04.2 LTS.
 
 ### Install the dependencies
 
+To install the dependencies, run the following commands:
+
     sudo apt update
     sudo apt install g++ git cmake-qt-gui libboost-system-dev libopengl-dev qttools5-dev libqt5x11extras5-dev libqt5svg5-dev qtxmlpatterns5-dev-tools python3-dev libopenmpi-dev
 
 ### Install Paraview
+
+In the following command, replace the `4` in `make -j4 install` by the number of cores available.
 
     cd ~
     git clone https://github.com/topology-tool-kit/ttk-paraview.git
@@ -26,6 +26,8 @@ Tested on Ubuntu 22.04.2 LTS.
 
  ### Install TTK using this repository
 
+We will now install TTK using the code provided by this repository. Again, replace the `4` in `make -j4 install` by the number of cores available.
+
     cd ~
     git clone https://github.com/eve-le-guillou/TTK-MPI-at-example.git
     cd ~/TTK-MPI-at-example/ttk-1.2.0
@@ -36,6 +38,9 @@ Tested on Ubuntu 22.04.2 LTS.
 
 ### Update environment variables
 
+TTK is now installed, but needs an update of the environment variables to be called easily in the command line.
+
+    export PATH=$PATH:~/ttk-paraview/install/bin/
     TTK_PREFIX=~/TTK-MPI-at-example/ttk-1.2.0/install
     export PV_PLUGIN_PATH=$TTK_PREFIX/bin/plugins/TopologyToolKit
     export LD_LIBRARY_PATH=$TTK_PREFIX/lib:$LD_LIBRARY_PATH
@@ -43,9 +48,21 @@ Tested on Ubuntu 22.04.2 LTS.
 
 ### Run the example
 
-By default, the example is resampled to 256.
+By default, the example is resampled to $256^3$. To execute it using 2 threads and 4 processes, use the following command:
 
-    OMP_NUM_THREADS=4 mpirun -n 4 pvbatch pipeline.py
+    OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py
+
+Note that if your system has less than 4 cores available, the previous command will not compute. You can then either reduce the number of processes or force the execution by adding `--oversubscribe` to the mpirun command:
+
+    OMP_NUM_THREADS=2 mpirun --oversubscribe -n 4 pvbatch pipeline.py
+
+We advise, for better performance, to have at most as many processes $p$ as there are physical cores on the system. For the thread number $t$, we advise to choose $t$ such that $t \times p$ is at most equal to the number of logical cores on the system.
+
+If you want to resample to a higher dimension, for example $2048^3$ as in the reference paper, it can simply be done by executing the following command:
+
+    OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py 2048
+
+Be aware that this will require a lot of memory to execute and will most likely not be possible on a regular laptop.
 
 The output image can be shown using the following command:
 

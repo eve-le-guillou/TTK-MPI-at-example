@@ -13,7 +13,7 @@ from paraview.simple import *
 if len(sys.argv) == 2:
         dim = int(sys.argv[1])
 else:
-        dim = 512
+        dim = 256
 
 # ----------------------------------------------------------------
 # setup views used in the visualization
@@ -228,8 +228,6 @@ contour1Display.Specular = 1.0
 contour1Display.SelectTCoordArray = 'None'
 contour1Display.SelectNormalArray = 'Normals'
 contour1Display.SelectTangentArray = 'None'
-#contour1Display.OSPRayScaleArray = 'density'
-#contour1Display.OSPRayScaleFunction = 'PiecewiseFunction'
 contour1Display.SelectOrientationVectors = 'None'
 contour1Display.ScaleFactor = 15.944606685638428
 contour1Display.SelectScaleArray = 'density'
@@ -343,36 +341,36 @@ gradientMagnitudeLUT.ScalarRangeInitialized = 1.0
 # note: the Get..() functions create a new object, if needed
 # ----------------------------------------------------------------
 
-# show data from tTKBlankFilter1
-tTKBlankFilter1Display = Show(tube1, renderView1, 'GeometryRepresentation')
+# show data from tube1
+tube1Display = Show(tube1, renderView1, 'GeometryRepresentation')
 
 # trace defaults for the display properties.
-tTKBlankFilter1Display.Representation = 'Surface'
-tTKBlankFilter1Display.ColorArrayName = ['POINTS', 'gradientMagnitude']
-tTKBlankFilter1Display.LookupTable = gradientMagnitudeLUT
-tTKBlankFilter1Display.SelectTCoordArray = 'None'
-tTKBlankFilter1Display.SelectNormalArray = 'TubeNormals'
-tTKBlankFilter1Display.SelectTangentArray = 'None'
-tTKBlankFilter1Display.SelectOrientationVectors = 'None'
-tTKBlankFilter1Display.ScaleFactor = 15.00286865234375
-tTKBlankFilter1Display.SelectScaleArray = 'DistanceFromSeed'
-tTKBlankFilter1Display.GlyphType = 'Arrow'
-tTKBlankFilter1Display.GlyphTableIndexArray = 'DistanceFromSeed'
-tTKBlankFilter1Display.GaussianRadius = 0.7501434326171875
-tTKBlankFilter1Display.SetScaleArray = ['POINTS', 'DistanceFromSeed']
-tTKBlankFilter1Display.ScaleTransferFunction = 'PiecewiseFunction'
-tTKBlankFilter1Display.OpacityArray = ['POINTS', 'DistanceFromSeed']
-tTKBlankFilter1Display.OpacityTransferFunction = 'PiecewiseFunction'
-tTKBlankFilter1Display.DataAxesGrid = 'GridAxesRepresentation'
-tTKBlankFilter1Display.PolarAxes = 'PolarAxesRepresentation'
-tTKBlankFilter1Display.SelectInputVectors = ['POINTS', 'TubeNormals']
-tTKBlankFilter1Display.WriteLog = ''
+tube1Display.Representation = 'Surface'
+tube1Display.ColorArrayName = ['POINTS', 'gradientMagnitude']
+tube1Display.LookupTable = gradientMagnitudeLUT
+tube1Display.SelectTCoordArray = 'None'
+tube1Display.SelectNormalArray = 'TubeNormals'
+tube1Display.SelectTangentArray = 'None'
+tube1Display.SelectOrientationVectors = 'None'
+tube1Display.ScaleFactor = 15.00286865234375
+tube1Display.SelectScaleArray = 'DistanceFromSeed'
+tube1Display.GlyphType = 'Arrow'
+tube1Display.GlyphTableIndexArray = 'DistanceFromSeed'
+tube1Display.GaussianRadius = 0.7501434326171875
+tube1Display.SetScaleArray = ['POINTS', 'DistanceFromSeed']
+tube1Display.ScaleTransferFunction = 'PiecewiseFunction'
+tube1Display.OpacityArray = ['POINTS', 'DistanceFromSeed']
+tube1Display.OpacityTransferFunction = 'PiecewiseFunction'
+tube1Display.DataAxesGrid = 'GridAxesRepresentation'
+tube1Display.PolarAxes = 'PolarAxesRepresentation'
+tube1Display.SelectInputVectors = ['POINTS', 'TubeNormals']
+tube1Display.WriteLog = ''
 
 # init the 'PiecewiseFunction' selected for 'ScaleTransferFunction'
-tTKBlankFilter1Display.ScaleTransferFunction.Points = [0.0, 0.0, 0.5, 0.0, 23.242640614509583, 1.0, 0.5, 0.0]
+tube1Display.ScaleTransferFunction.Points = [0.0, 0.0, 0.5, 0.0, 23.242640614509583, 1.0, 0.5, 0.0]
 
 # init the 'PiecewiseFunction' selected for 'OpacityTransferFunction'
-tTKBlankFilter1Display.OpacityTransferFunction.Points = [0.0, 0.0, 0.5, 0.0, 23.242640614509583, 1.0, 0.5, 0.0]
+tube1Display.OpacityTransferFunction.Points = [0.0, 0.0, 0.5, 0.0, 23.242640614509583, 1.0, 0.5, 0.0]
 
 # get opacity transfer function/opacity map for 'gradientMagnitude'
 gradientMagnitudePWF = GetOpacityTransferFunction('gradientMagnitude')
