@@ -1,7 +1,7 @@
 ///
 /// \ingroup base
 /// \class ttk::Identifiers
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
 /// \date October 2022.
 ///
 /// This module defines the %Identifiers class that computes for each vertex of

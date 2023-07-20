@@ -1,6 +1,6 @@
 /// \ingroup base
-/// \author Michael Will <mswill@rhrk.uni-kl.de>
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
+/// \author XXX
 /// \date April 2022
 ///
 /// \brief Utilities for MPI implementation.

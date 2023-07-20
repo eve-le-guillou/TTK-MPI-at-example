@@ -1,6 +1,6 @@
 /// \ingroup base
 /// \class ttk::ArrayPreconditioning
-/// \author Michael Will <mswill@rhrk.uni-kl.de>
+/// \author XXX
 /// \date 2022.
 ///
 /// This module defines the %ArrayPreconditioning class that generates order

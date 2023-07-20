@@ -1,6 +1,6 @@
 /// \ingroup vtk
 /// \class ttkPeriodicGhostsGeneration
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
 /// \date June 2023.
 ///
 /// \brief TTK VTK-filter that generates an outside ghost layer for periodic

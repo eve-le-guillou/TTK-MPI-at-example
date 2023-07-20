@@ -1,6 +1,6 @@
 /// \ingroup base
 /// \class ttk::RegularGridTriangulation
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
 /// \date June 2023.
 ///
 /// \brief RegularGridTriangulation is an abstract subclass of

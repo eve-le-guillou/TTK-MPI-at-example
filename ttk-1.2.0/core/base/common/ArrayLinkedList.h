@@ -1,6 +1,6 @@
 /// \ingroup base
 /// \class ttk::ArrayLinkedList
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
 /// \date Mars 2022.
 /// \brief This class describes a dynamic size data structure for thread safe
 /// computation. It is a linked list of arrays that also stores the current

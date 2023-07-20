@@ -1,7 +1,7 @@
 /// \ingroup vtk
 /// \class ttkIntegralLines
-/// \author Guillaume Favelier <guillaume.favelier@lip6.fr>
-/// \author Eve Le Guillou <eve.le-guillou@lip6.fr>
+/// \author XXX
+/// \author XXX
 /// \date March 2016
 /// \date MPI implementation: December 2022
 ///
