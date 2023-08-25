@@ -1,5 +1,12 @@
 # TTK-MPI-at-example
-This github repository contains the exact code used to reproduce the AT example.
+This github repository contains the exact code used to reproduce the AT example in the reference below.
+
+## Reference
+
+If you plan to use this code to generate results for a scientific document, thanks for referencing the following publication:
+
+"TTK is Getting MPI-Ready"
+Eve Le Guillou, Michael Will, Pierre Guillou, Jonas Lukasczyk, Pierre Fortin, Chistoph Garth, Julien Tierny
 
 ## Installation Notes
 
@@ -54,23 +61,16 @@ By default, the example is resampled to $256^3$. To execute it using 2 threads a
 
     OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py
 
-Note that if your system has less than 4 cores available, the previous command will not compute. You can then either reduce the number of processes or force the execution by adding `--oversubscribe` to the mpirun command:
-
-    OMP_NUM_THREADS=2 mpirun --oversubscribe -n 4 pvbatch pipeline.py
-
 We advise, for better performance, to have at most as many processes $p$ as there are physical cores on the system. For the thread number $t$, we advise to choose $t$ such that $t \times p$ is at most equal to the number of logical cores on the system.
 
 Furthermore, the default placing of processes and threads on the computing cores and nodes may not be the best and may result in poor performance, particularly when the chosen number of threads is close to the total number of logical cores.
 
-Here is a suggestion of configuration:
+Here is the configuration used to produce the results in the reference paper:
 
-    OMP_PLACES=cores OMP_PROC_BIND=close OMP_NUM_THREADS=8 mpirun --bind-to none --map-by node -n 2 pvbatch pipeline.py
+    OMP_PLACES=cores OMP_PROC_BIND=close OMP_NUM_THREADS=2 mpirun --bind-to none --map-by node -n 4 pvbatch pipeline.py
 
 Please note that this configuration may **not** be adapted to your CPU architecture, your OpenMP version or OpenMPI version. It is only a suggestion. To find the adapted configuration for you, please refer to the documentation of OpenMPI and OpenMP.
 
-To measure the overall execution time, the `time` command can be used:
-
-    time OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py
 
 If you want to resample to a higher dimension, for example $2048^3$ as in the reference paper, it can simply be done by executing the following command:
 
@@ -78,6 +78,6 @@ If you want to resample to a higher dimension, for example $2048^3$ as in the re
 
 Be aware that this will require a lot of memory to execute and will most likely not be possible on a regular laptop.
 
-The command will create the following image:
+The command will create the following image and output the execution time of data loading and resampling, the pipeline and the creation of the output image. Depending on the dimension of the resample for the execution, the result may contain some resampling artifacts.
 
 ![output image](atExample.jpeg)

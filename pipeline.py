@@ -2,6 +2,7 @@
 import paraview
 paraview.compatibility.major = 5
 paraview.compatibility.minor = 11
+from time import time
 
 #### import the simple module from the paraview
 from paraview.simple import *
@@ -66,6 +67,7 @@ SetActiveView(renderView1)
 # setup the data processing pipelines
 # ----------------------------------------------------------------
 
+t0 = time()
 # create a new 'XML Image Data Reader'
 atvti = XMLImageDataReader(registrationName='at.vti', FileName=['./at.vti'])
 atvti.PointArrayStatus = ['density']
@@ -89,15 +91,28 @@ calculator2 = Calculator(registrationName='Calculator2', Input=computeDerivative
 calculator2.AttributeType = 'Cell Data'
 calculator2.ResultArrayName = 'gradientMagnitude'
 calculator2.Function = 'mag(ScalarGradient)'
+calculator2.ResultArrayType = 'Float'
 
 # create a new 'Cell Data to Point Data'
 cellDatatoPointData1 = CellDatatoPointData(registrationName='CellDatatoPointData1', Input=calculator2)
+cellDatatoPointData1.CellDataArraytoprocess = ['gradientMagnitude']
+
+# create a new 'TTK PointDataSelector'
+tTKPointDataSelector1 = TTKPointDataSelector(registrationName='TTKPointDataSelector1', Input=cellDatatoPointData1)
+tTKPointDataSelector1.ScalarFields = ['density', 'gradientMagnitude']
+tTKPointDataSelector1.RangeId = [0, 2]
+
+# create a new 'Cell Data to Point Data'
+cellDatatoPointData1 = CellDatatoPointData(registrationName='CellDatatoPointData1', Input=tTKPointDataSelector1)
 cellDatatoPointData1.CellDataArraytoprocess = ['ScalarGradient', 'gradientMagnitude']
 
 # create a new 'Resample To Image'
 resampleToImage1 = ResampleToImage(registrationName='ResampleToImage1', Input=cellDatatoPointData1)
 resampleToImage1.SamplingDimensions = [dim, dim, dim]
-#resampleToImage1.SamplingBounds = [0.0, 176.0, 0.0, 94.0, 0.0, 47.0]
+resampleToImage1.SamplingBounds = [0.0, 176.0, 0.0, 94.0, 0.0, 47.0]
+
+UpdatePipeline(proxy=resampleToImage1)
+t1 = time()
 
 # create a new 'TTK ScalarFieldSmoother'
 tTKScalarFieldSmoother1 = TTKScalarFieldSmoother(registrationName='TTKScalarFieldSmoother1', Input=resampleToImage1)
@@ -386,4 +401,10 @@ criticalTypePWF.ScalarRangeInitialized = 1
 densityPWF = GetOpacityTransferFunction('density')
 densityPWF.Points = [-3.7645358731683567, 1.0, 0.5, 0.0, -1.7128952741622925, 0.1026785746216774, 0.5, 0.0, -1.0048069953918457, 0.0, 0.5, 0.0, 0.17616011873621584, 0.0, 0.5, 0.0, 6.529978816539702, 0.0, 0.5, 0.0]
 densityPWF.ScalarRangeInitialized = 1
+t2 = time()
 SaveScreenshot("atExample.jpeg",renderView1, ImageResolution=[1280, 720])
+t3 = time()
+print(f"Loading file and resampling time: {t1-t0}")
+print(f"Pipeline time: {t2 - t1}")
+print(f"File saving time: {t3 - t2}")
+print(f"Total time: {t3 - t0}")
