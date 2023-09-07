@@ -61,15 +61,9 @@ By default, the example is resampled to $256^3$. To execute it using 2 threads a
 
     OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py
 
-We advise, for better performance, to have at most as many processes $p$ as there are physical cores on the system. For the thread number $t$, we advise to choose $t$ such that $t \times p$ is at most equal to the number of logical cores on the system.
+Regarding performance, the optimal configuration depends on the architecture and on the OpenMP and OpenMPI versions. The performance tests presented in the paper have been performed on 24-core nodes (without SMT -- simultaneous multithreading) using 64 nodes:
 
-Furthermore, the default placing of processes and threads on the computing cores and nodes may not be the best and may result in poor performance, particularly when the chosen number of threads is close to the total number of logical cores.
-
-Here is the configuration used to produce the results in the reference paper:
-
-    OMP_PLACES=cores OMP_PROC_BIND=close OMP_NUM_THREADS=2 mpirun --bind-to none --map-by node -n 4 pvbatch pipeline.py
-
-Please note that this configuration may **not** be adapted to your CPU architecture, your OpenMP version or OpenMPI version. It is only a suggestion. To find the adapted configuration for you, please refer to the documentation of OpenMPI and OpenMP.
+    OMPI_MPI_THREAD_LEVEL=1 OMP_PLACES=cores OMP_PROC_BIND=close OMP_NUM_THREADS=24 mpirun --bind-to none --map-by node --mca btl_openib_btls_per_lid 8 -n 64 pvbatch pipeline.py
 
 
 If you want to resample to a higher dimension, for example $2048^3$ as in the reference paper, it can simply be done by executing the following command:
