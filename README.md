@@ -38,7 +38,7 @@ We will now install TTK using the repository on Github. Again, replace the `4` i
     cd ~
     git clone https://github.com/topology-tool-kit/ttk.git
     cd ttk
-    git checkout 1.2.0
+    git checkout c701cd60b5432d5efe1e63442c3db2998ff383d8
     mkdir build && cd build
     PARAVIEW_PATH=~/ttk-paraview/install/lib/cmake/paraview-5.11
     cmake -DParaView_DIR=$PARAVIEW_PATH -DTTK_ENABLE_MPI=ON -DTTK_ENABLE_MPI_TIME=ON 
