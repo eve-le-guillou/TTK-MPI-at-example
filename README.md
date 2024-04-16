@@ -50,7 +50,7 @@ We will now install TTK using the repository on Github. Again, replace the `4` i
 TTK is now installed, but needs an update of the environment variables to be called easily in the command line.
 
     export PATH=$PATH:~/ttk-paraview/install/bin/
-    TTK_PREFIX=~/TTK-MPI-at-example/ttk-1.2.0/install
+    TTK_PREFIX=~/ttk/install
     export PV_PLUGIN_PATH=$TTK_PREFIX/bin/plugins/TopologyToolKit
     export LD_LIBRARY_PATH=$TTK_PREFIX/lib:$LD_LIBRARY_PATH
     export PYTHONPATH=$TTK_PREFIX/lib/python3.10/site-packages
