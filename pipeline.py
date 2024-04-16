@@ -402,7 +402,7 @@ densityPWF = GetOpacityTransferFunction('density')
 densityPWF.Points = [-3.7645358731683567, 1.0, 0.5, 0.0, -1.7128952741622925, 0.1026785746216774, 0.5, 0.0, -1.0048069953918457, 0.0, 0.5, 0.0, 0.17616011873621584, 0.0, 0.5, 0.0, 6.529978816539702, 0.0, 0.5, 0.0]
 densityPWF.ScalarRangeInitialized = 1
 t2 = time()
-SaveScreenshot("atExample.jpeg",renderView1, ImageResolution=[1280, 720])
+SaveScreenshot("atExample.png",renderView1, ImageResolution=[1280, 720])
 t3 = time()
 print(f"Loading file and resampling time: {t1-t0}")
 print(f"Pipeline time: {t2 - t1}")
