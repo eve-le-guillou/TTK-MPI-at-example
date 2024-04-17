@@ -74,4 +74,4 @@ Be aware that this will require a lot of memory to execute and will most likely 
 
 The command will create the following image and output the execution time of data loading and resampling, the pipeline and the creation of the output image. Depending on the dimension of the resample for the execution, the result may contain some resampling artifacts.
 
-![output image](atExample.jpeg)
+![output image](atExample.png)
