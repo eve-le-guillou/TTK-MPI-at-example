@@ -57,6 +57,12 @@ TTK is now installed, but needs an update of the environment variables to be cal
 
 ### Run the example
 
+First, retrieve this repository.
+
+    cd ~ 
+    git clone git@github.com:eve-le-guillou/TTK-MPI-at-example.git
+    cd TTK-MPI-at-example/
+
 By default, the example is resampled to $256^3$. To execute it using 2 threads and 4 processes, use the following command:
 
     OMP_NUM_THREADS=2 mpirun -n 4 pvbatch pipeline.py
