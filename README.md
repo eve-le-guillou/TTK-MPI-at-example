@@ -31,6 +31,8 @@ In the following command, replace the `4` in `make -j4 install` by the number of
     cmake -DCMAKE_BUILD_TYPE=Release -DPARAVIEW_USE_PYTHON=ON -DPARAVIEW_USE_MPI=ON -DPARAVIEW_INSTALL_DEVELOPMENT_FILES=ON -DCMAKE_INSTALL_PREFIX=../install ..
     make -j4 install
 
+Please note that ParaView will use an X server by default to produce the image below. If there are no X server on your machine and that you wish to produce the image, please refer to [this ParaView documentation](https://kitware.github.io/paraview-docs/latest/cxx/Offscreen.html) to build the software using off-screen rendering.
+
  ### Install TTK using this repository
 
 We will now install TTK using the repository on Github. Again, replace the `4` in `make -j4 install` by the number of cores available.
