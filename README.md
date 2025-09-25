@@ -1,6 +1,8 @@
 # TTK-MPI-at-example
 This github repository contains the exact code used to reproduce the AT example in the reference below.
 
+This repository is a standalone example created to reproduce the results of the reference below. It is not maintained. For a maintained version of this example, please see the [TTK documentation](https://topology-tool-kit.github.io/examples/distributedPersistenceDiagram/).
+
 ## Reference
 
 If you plan to use this code to generate results for a scientific document, thanks for referencing the following publication:
